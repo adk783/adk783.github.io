@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antoine Dupuy — Ingénieur Informatique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0b;
+            --bg-card: #131316;
+            --bg-card-hover: #1a1a1f;
+            --border: #1f1f25;
+            --text: #e4e4e7;
+            --text-muted: #71717a;
+            --text-dim: #52525b;
+            --accent: #818cf8;
+            --accent-dim: rgba(129, 140, 248, 0.12);
+            --accent-glow: rgba(129, 140, 248, 0.06);
+            --green: #34d399;
+            --green-dim: rgba(52, 211, 153, 0.12);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 11, 0.8);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        nav .logo span { color: var(--accent); }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: color 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        nav .nav-links a:hover { color: var(--text); }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: var(--green-dim);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--green);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .accent { color: var(--accent); }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 560px;
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #0a0a0b;
+        }
+
+        .btn-primary:hover {
+            background: #a5b4fc;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            color: var(--text);
+            border-color: var(--text-dim);
+            background: var(--bg-card);
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ─── SECTIONS ─── */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 3rem;
+        }
+
+        /* ─── PROJECTS ─── */
+        .projects-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .project-card:hover {
+            border-color: rgba(129, 140, 248, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .project-visual {
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-visual-1 {
+            background: linear-gradient(135deg, #1a1033 0%, #0d1b2a 50%, #0a192f 100%);
+        }
+
+        .project-visual-2 {
+            background: linear-gradient(135deg, #1a0f2e 0%, #16132b 50%, #0f0c29 100%);
+        }
+
+        .project-visual-3 {
+            background: linear-gradient(135deg, #0b1a2a 0%, #0d2137 50%, #0a1628 100%);
+        }
+
+        .project-visual svg {
+            width: 60%;
+            height: 60%;
+            opacity: 0.55;
+        }
+
+        .project-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .project-date {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-org {
+            font-size: 0.7rem;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 0.15rem 0.6rem;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-tags span {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: gap 0.2s;
+        }
+
+        .project-link:hover { gap: 0.7rem; }
+
+        .project-link svg { width: 14px; height: 14px; }
+
+        /* ─── SKILLS ─── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-group {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem;
+        }
+
+        .skill-group h3 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.45rem 0.9rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.825rem;
+            color: var(--text);
+            font-weight: 400;
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        /* ─── EXPERIENCE ─── */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .timeline-item:last-child { border-bottom: none; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 2rem;
+            width: 9px;
+            height: 9px;
+            background: var(--bg);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            transform: translateX(-4px);
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item .org {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .timeline-item p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* ─── FORMATION ─── */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+        }
+
+        .edu-card .edu-date {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .edu-card .erasmus-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        /* ─── CONTACT ─── */
+        .contact-section {
+            text-align: center;
+            padding-bottom: 8rem;
+        }
+
+        .contact-section .section-title {
+            margin-bottom: 1rem;
+        }
+
+        .contact-section .contact-sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        .contact-item svg { width: 18px; height: 18px; color: var(--text-muted); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+        }
+
+        /* ─── ANIMATIONS ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 800px) {
+            .project-card {
+                grid-template-columns: 1fr;
+            }
+
+            .project-visual {
+                aspect-ratio: 16/8;
+            }
+
+            nav .nav-links { display: none; }
+            nav .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10,10,11,0.97);
+                backdrop-filter: blur(20px);
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .mobile-toggle { display: block; }
+
+            .hero { min-height: auto; padding: 7rem 1.5rem 3rem; }
+            section { padding: 4rem 1.5rem; }
+        }
+
+        @media (max-width: 500px) {
+            .hero-buttons { flex-direction: column; }
+            .btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">A<span>.</span>Dupuy</div>
+        <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+        <ul class="nav-links">
+            <li><a onclick="navScrollTo('projets')" style="cursor:pointer">Projets</a></li>
+            <li><a onclick="navScrollTo('competences')" style="cursor:pointer">Compétences</a></li>
+            <li><a onclick="navScrollTo('experience')" style="cursor:pointer">Expérience</a></li>
+            <li><a onclick="navScrollTo('formation')" style="cursor:pointer">Formation</a></li>
+            <li><a onclick="navScrollTo('contact')" style="cursor:pointer">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">Recherche de stage · Mai–Août 2026</div>
+        <h1 class="fade-in">Antoine Dupuy<br><span class="accent">Ingénieur Informatique</span></h1>
+        <p class="subtitle fade-in">Étudiant en 4ᵉ année à l'ESIEE Paris. Stage de 3 à 4 mois — IA appliquée & développement logiciel.</p>
+        <div class="hero-buttons fade-in">
+            <a href="https://github.com/adk783" target="_blank" rel="noopener" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/adupuy-ing/" target="_blank" rel="noopener" class="btn btn-ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+            </a>
+            <a href="AntoineDupuyCVFR.pdf" download class="btn btn-ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger CV
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- PROJETS -->
+<section id="projets">
+    <div class="section-label fade-in">// projets</div>
+    <h2 class="section-title fade-in">Ce que j'ai construit</h2>
+
+    <div class="projects-grid">
+
+        <!-- Projet 1 -->
+        <div class="project-card fade-in">
+            <div class="project-visual project-visual-1">
+                <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="30" width="50" height="35" rx="4" stroke="#818cf8" stroke-width="1.5" opacity="0.6"/>
+                    <rect x="130" y="30" width="50" height="35" rx="4" stroke="#818cf8" stroke-width="1.5" opacity="0.6"/>
+                    <rect x="75" y="95" width="50" height="35" rx="4" stroke="#818cf8" stroke-width="1.5" opacity="0.8"/>
+                    <path d="M70 55 L85 95" stroke="#818cf8" stroke-width="1" opacity="0.35"/>
+                    <path d="M130 55 L115 95" stroke="#818cf8" stroke-width="1" opacity="0.35"/>
+                    <circle cx="45" cy="47" r="8" stroke="#34d399" stroke-width="1" opacity="0.5"/>
+                    <circle cx="155" cy="47" r="8" stroke="#34d399" stroke-width="1" opacity="0.5"/>
+                    <circle cx="100" cy="112" r="8" stroke="#f472b6" stroke-width="1" opacity="0.5"/>
+                    <text x="45" y="50" text-anchor="middle" fill="#818cf8" font-size="7" opacity="0.7">AI</text>
+                    <text x="155" y="50" text-anchor="middle" fill="#818cf8" font-size="7" opacity="0.7">NLP</text>
+                    <text x="100" y="115" text-anchor="middle" fill="#f472b6" font-size="6" opacity="0.7">Agent</text>
+                    <line x1="30" y1="140" x2="170" y2="140" stroke="#818cf8" stroke-width="0.5" opacity="0.15"/>
+                    <circle cx="50" cy="135" r="1.5" fill="#34d399" opacity="0.3"/>
+                    <circle cx="80" cy="132" r="1" fill="#818cf8" opacity="0.3"/>
+                    <circle cx="120" cy="137" r="1.5" fill="#f472b6" opacity="0.3"/>
+                    <circle cx="150" cy="133" r="1" fill="#818cf8" opacity="0.3"/>
+                </svg>
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <span class="project-date">Fév. 2026 — Présent</span>
+                    <span class="project-org">IMGT Group</span>
+                </div>
+                <h3>Système multi-agents d'analyse de news financières</h3>
+                <p>Développement du socle technique et du pipeline de collecte de news en tant que l'un des 2 développeurs principaux. Analyse de sentiment automatisée pour la prise de décision en trading.</p>
+                <div class="project-tags">
+                    <span>Python</span>
+                    <span>Multi-Agents</span>
+                    <span>NLP</span>
+                    <span>IA</span>
+                </div>
+                <a href="https://github.com/adk783/Projet-News-Agents" target="_blank" rel="noopener" class="project-link">
+                    Voir sur GitHub
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Projet 2 -->
+        <div class="project-card fade-in">
+            <div class="project-visual project-visual-2">
+                <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="40" y="25" width="120" height="80" rx="8" stroke="#818cf8" stroke-width="1.5" opacity="0.4"/>
+                    <rect x="40" y="25" width="120" height="14" rx="8" fill="#818cf8" opacity="0.08"/>
+                    <circle cx="52" cy="32" r="3" fill="#f87171" opacity="0.5"/>
+                    <circle cx="62" cy="32" r="3" fill="#fbbf24" opacity="0.5"/>
+                    <circle cx="72" cy="32" r="3" fill="#34d399" opacity="0.5"/>
+                    <rect x="50" y="50" width="40" height="6" rx="3" fill="#818cf8" opacity="0.15"/>
+                    <rect x="50" y="62" width="60" height="6" rx="3" fill="#818cf8" opacity="0.1"/>
+                    <rect x="50" y="74" width="35" height="6" rx="3" fill="#34d399" opacity="0.15"/>
+                    <rect x="50" y="86" width="50" height="6" rx="3" fill="#818cf8" opacity="0.08"/>
+                    <rect x="120" y="50" width="30" height="45" rx="4" stroke="#f472b6" stroke-width="1" opacity="0.3"/>
+                    <text x="135" y="76" text-anchor="middle" fill="#f472b6" font-size="16" opacity="0.4">⏱</text>
+                    <rect x="55" y="115" width="90" height="18" rx="9" stroke="#818cf8" stroke-width="1" opacity="0.3"/>
+                    <text x="100" y="127" text-anchor="middle" fill="#818cf8" font-size="8" opacity="0.5">Focus Mode</text>
+                </svg>
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <span class="project-date">Mai — Juil. 2025</span>
+                </div>
+                <h3>ConcentTrade — Application de productivité</h3>
+                <p>Application Windows combinant Pomodoro et blocage d'apps distrayantes. Détection événementielle via WMI et gestion automatisée des processus en temps réel.</p>
+                <div class="project-tags">
+                    <span>C#</span>
+                    <span>.NET</span>
+                    <span>WPF</span>
+                    <span>Windows API</span>
+                    <span>WMI</span>
+                </div>
+                <a href="https://github.com/raphDucour/ConcenTrade" target="_blank" rel="noopener" class="project-link">
+                    Voir sur GitHub
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Projet 3 -->
+        <div class="project-card fade-in">
+            <div class="project-visual project-visual-3">
+                <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 100 Q50 80 80 95 Q110 110 140 90 Q170 70 200 85" stroke="#38bdf8" stroke-width="1.5" opacity="0.3" fill="none"/>
+                    <path d="M0 110 Q40 90 80 105 Q120 120 160 100 Q190 85 200 95" stroke="#38bdf8" stroke-width="1" opacity="0.2" fill="none"/>
+                    <path d="M10 120 Q50 100 90 115 Q130 130 170 110 Q195 95 200 105" stroke="#38bdf8" stroke-width="0.5" opacity="0.15" fill="none"/>
+                    <rect x="75" y="55" width="50" height="35" rx="4" stroke="#818cf8" stroke-width="1.5" opacity="0.5" fill="rgba(129,140,248,0.03)"/>
+                    <line x1="85" y1="75" x2="85" y2="100" stroke="#818cf8" stroke-width="0.8" opacity="0.3" stroke-dasharray="2,3"/>
+                    <line x1="100" y1="75" x2="100" y2="105" stroke="#818cf8" stroke-width="0.8" opacity="0.3" stroke-dasharray="2,3"/>
+                    <line x1="115" y1="75" x2="115" y2="95" stroke="#818cf8" stroke-width="0.8" opacity="0.3" stroke-dasharray="2,3"/>
+                    <circle cx="85" cy="100" r="3" fill="#38bdf8" opacity="0.4"/>
+                    <circle cx="100" cy="105" r="3" fill="#38bdf8" opacity="0.4"/>
+                    <circle cx="115" cy="95" r="3" fill="#38bdf8" opacity="0.4"/>
+                    <text x="100" y="70" text-anchor="middle" fill="#818cf8" font-size="8" opacity="0.5">Godot 4</text>
+                    <path d="M60 40 L80 55" stroke="#818cf8" stroke-width="0.5" opacity="0.2"/>
+                    <path d="M140 40 L120 55" stroke="#818cf8" stroke-width="0.5" opacity="0.2"/>
+                    <text x="50" y="38" fill="#38bdf8" font-size="7" opacity="0.35">ρgV</text>
+                    <text x="140" y="38" fill="#38bdf8" font-size="7" opacity="0.35">F↑</text>
+                </svg>
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <span class="project-date">Sept. — Nov. 2025</span>
+                </div>
+                <h3>Simulation de flottabilité dynamique</h3>
+                <p>Simulation physique avec Godot 4 : points d'ancrage synchronisés avec la surface de l'eau, modélisation de la traînée directionnelle et algèbre vectorielle pour un rendu réaliste.</p>
+                <div class="project-tags">
+                    <span>Godot 4</span>
+                    <span>GDScript</span>
+                    <span>Physique des fluides</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences">
+    <div class="section-label fade-in">// compétences</div>
+    <h2 class="section-title fade-in">Stack technique</h2>
+
+    <div class="skills-grid">
+        <div class="skill-group fade-in">
+            <h3>Langages</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">C# / .NET</span>
+                <span class="skill-tag">C++</span>
+                <span class="skill-tag">Java</span>
+            </div>
+        </div>
+        <div class="skill-group fade-in">
+            <h3>Outils & Frameworks</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">GitHub</span>
+                <span class="skill-tag">Unity</span>
+                <span class="skill-tag">Godot 4</span>
+                <span class="skill-tag">SQLite</span>
+                <span class="skill-tag">VS Code</span>
+            </div>
+        </div>
+        <div class="skill-group fade-in">
+            <h3>Soft Skills</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Rigueur</span>
+                <span class="skill-tag">Travail d'équipe</span>
+                <span class="skill-tag">Adaptabilité</span>
+                <span class="skill-tag">Veille techno</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPÉRIENCE -->
+<section id="experience">
+    <div class="section-label fade-in">// expérience</div>
+    <h2 class="section-title fade-in">Parcours professionnel</h2>
+
+    <div class="timeline">
+        <div class="timeline-item fade-in">
+            <div class="timeline-date">Étés 2023, 2024 & 2025</div>
+            <h3>Auxiliaire d'été</h3>
+            <span class="org">Banque Crédit Mutuel — Bois-d'Arcy</span>
+            <p>Accueil client, accompagnement sur les opérations courantes. Gestion rigoureuse des procédures de sécurité bancaire. Intégration rapide 3 années consécutives.</p>
+        </div>
+        <div class="timeline-item fade-in">
+            <div class="timeline-date">2023 — 2025</div>
+            <h3>Responsable événementiel</h3>
+            <span class="org">Bureau des Élèves ESIEE Paris — Équipe de 12</span>
+            <p>Organisation d'événements pour 1 500+ étudiants. Planification logistique et coordination inter-pôles.</p>
+        </div>
+        <div class="timeline-item fade-in">
+            <div class="timeline-date">Janv. 2021 — Juin 2022</div>
+            <h3>Bénévole vestiboutique</h3>
+            <span class="org">Croix-Rouge française — Montigny-le-Bretonneux</span>
+            <p>Gestion quotidienne des dons, tri et mise en rayon. Développement du sens de l'organisation et du service client.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation">
+    <div class="section-label fade-in">// formation</div>
+    <h2 class="section-title fade-in">Études</h2>
+
+    <div class="education-grid">
+        <div class="edu-card fade-in">
+            <div class="edu-date">2022 — 2027 (diplôme visé)</div>
+            <h3>ESIEE Paris</h3>
+            <p>Cycle Ingénieur Informatique. Développement C++, algorithmique complexe, architecture système, réseaux et optimisation de performance.</p>
+            <div class="erasmus-tag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Erasmus — University of West Bohemia, Pilsen
+            </div>
+        </div>
+        <div class="edu-card fade-in">
+            <div class="edu-date">TOEIC 900/990</div>
+            <h3>Anglais — Niveau B2</h3>
+            <p>Cours universitaires suivis en anglais lors du semestre Erasmus en République Tchèque.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+    <div class="section-label fade-in">// contact</div>
+    <h2 class="section-title fade-in">Travaillons ensemble</h2>
+    <p class="contact-sub fade-in">Disponible pour un stage de 3 à 4 mois à partir du 11 mai 2026.</p>
+
+    <div class="contact-links fade-in">
+        <a href="mailto:antoine.dupuy01@gmail.com" class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            antoine.dupuy01@gmail.com
+        </a>
+        <a href="tel:+33638575484" class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +33 6 38 57 54 84
+        </a>
+        <a href="https://github.com/adk783" target="_blank" rel="noopener" class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/adupuy-ing/" target="_blank" rel="noopener" class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+        </a>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Antoine Dupuy</p>
+</footer>
+
+<script>
+    // Smooth scroll function (avoids iframe anchor issues)
+    function navScrollTo(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelector('.nav-links').classList.remove('open');
+        }
+    }
+
+    // Intersection Observer for fade-in
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, i * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
