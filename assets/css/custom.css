@@ -340,6 +340,21 @@
 		border-color: var(--accent);
 	}
 
+/* Footer: required CC BY 3.0 template credit, kept visible but unobtrusive. */
+
+	#footer .copyright li.template-credit {
+		border-left-width: 0;
+		display: block;
+		font-size: 0.7em;
+		margin: 0.5em 0 0 0;
+		opacity: 0.6;
+		padding-left: 0;
+	}
+
+	#footer .copyright li.template-credit a {
+		border-bottom: none;
+	}
+
 /* Skills */
 
 	.skills-grid h4 {
