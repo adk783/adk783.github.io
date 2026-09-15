@@ -159,8 +159,8 @@
 								<ul class="project-results">
 									<li><strong><span lang="fr">Chaque valeur vérifiée</span><span lang="en">Every value verified</span></strong><span lang="fr">contre le texte source du site</span><span lang="en">against the website source text</span></li>
 								</ul>
-								<p lang="fr"><strong>Solution :</strong> à partir de la simple URL du site, l'outil parcourt les pages et les PDF, extrait l'offre par LLM et produit un brouillon de catalogue modifiable. Connecteurs dédiés aux plateformes de réservation courantes et protection contre les requêtes malveillantes (SSRF).</p>
-								<p lang="en"><strong>Solution:</strong> from just the website URL, the tool crawls pages and PDFs, extracts the offer with an LLM and produces an editable catalog draft. Dedicated connectors for common booking platforms and protection against malicious requests (SSRF).</p>
+								<p lang="fr"><strong>Solution :</strong> à partir de la simple URL du site, l'outil parcourt les pages et les PDF, extrait l'offre par LLM et produit un brouillon de catalogue modifiable. Il sait aussi lire directement les pages des plateformes de réservation les plus utilisées par les ateliers, et il est sécurisé pour qu'une URL piégée ne puisse pas lui faire accéder à des serveurs internes.</p>
+								<p lang="en"><strong>Solution:</strong> from just the website URL, the tool crawls pages and PDFs, extracts the offer with an LLM and produces an editable catalog draft. It can also read pages from the booking platforms workshops use most, and it is secured so that a malicious URL cannot make it reach internal servers.</p>
 								<ul class="tags"><li>Next.js</li><li>TypeScript</li><li>Playwright</li><li>Gemini</li></ul>
 								<p class="project-note"><span lang="fr">Outil interne, code privé.</span><span lang="en">Internal tool, private code.</span></p>
 							</article>
@@ -287,6 +287,10 @@
 							<li>
 								<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
 								<a href="mailto:antoine.dupuy01@gmail.com">antoine.dupuy01@gmail.com</a>
+								<button type="button" class="copy-email" data-copy="antoine.dupuy01@gmail.com">
+									<span class="copy-idle"><span lang="fr">Copier</span><span lang="en">Copy</span></span>
+									<span class="copy-done" hidden><span lang="fr">Copié</span><span lang="en">Copied</span></span>
+								</button>
 							</li>
 							<li>
 								<h3 class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></h3>
@@ -322,6 +326,7 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/i18n.js"></script>
+			<script src="assets/js/copy-email.js"></script>
 
 	</body>
 </html>

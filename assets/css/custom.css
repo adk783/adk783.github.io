@@ -125,6 +125,11 @@
 
 	/* Right-aligned sidebar on desktop, centered stacked header on smaller screens. */
 	@media screen and (min-width: 981px) {
+		/* The sidebar is fixed: let it scroll when the window is too short for its content. */
+		#header {
+			overflow-y: auto;
+		}
+
 		#header .inner {
 			display: flex;
 			flex-direction: column;
@@ -302,6 +307,27 @@
 		color: var(--text-muted);
 		font-size: 0.85em;
 		font-style: italic;
+	}
+
+/* Contact */
+
+	.copy-email {
+		background: transparent;
+		border: solid 1px var(--border);
+		border-radius: 4px;
+		box-shadow: none;
+		color: var(--text-bold) !important;
+		cursor: pointer;
+		font-size: 0.75em;
+		height: 2.2em;
+		line-height: 2.1em;
+		margin-left: 0.75em;
+		padding: 0 0.8em;
+		vertical-align: middle;
+	}
+
+	.copy-email:hover {
+		border-color: var(--accent);
 	}
 
 /* Skills */
