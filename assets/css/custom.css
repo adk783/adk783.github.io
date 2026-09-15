@@ -324,10 +324,17 @@
 
 /* Profile */
 
+	/* Three buttons do not fit on one line between phone and tablet widths. */
+	#one ul.actions {
+		flex-wrap: wrap;
+		row-gap: 1em;
+	}
+
 	.profile-headline {
 		color: var(--text-bold);
-		font-size: 1.1em;
-		line-height: 1.6em;
+		font-size: 1.4em;
+		font-weight: 700;
+		line-height: 1.4em;
 		margin-bottom: 1em;
 	}
 
