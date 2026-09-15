@@ -1,0 +1,316 @@
+/*
+	Portfolio overrides on top of Strata (assets/css/main.css).
+	Kept separate so the template stylesheet stays untouched.
+*/
+
+:root {
+	--accent: #2f9e7e;
+	--accent-strong: #237a61;
+	--text: #555555;
+	--text-bold: #333333;
+	--text-muted: #6b6b6b;
+	--border: #e6e6e6;
+	--surface: #f6f7f7;
+}
+
+/* Language visibility: only the active language is rendered. */
+
+	html[lang="fr"] body [lang="en"],
+	html[lang="en"] body [lang="fr"] {
+		display: none !important;
+	}
+
+/* Readable contrast (the template grey #a2a2a2 fails WCAG AA on white). */
+
+	body, input, select, textarea {
+		color: var(--text);
+	}
+
+	strong, b, h1, h2, h3, h4, h5, h6 {
+		color: var(--text-bold);
+	}
+
+	a {
+		color: var(--accent-strong);
+	}
+
+	.button.primary, input[type="submit"].primary {
+		background-color: var(--accent);
+	}
+
+	.button.primary:hover {
+		background-color: var(--accent-strong);
+	}
+
+/* Header */
+
+	#header h1 {
+		color: rgba(255, 255, 255, 0.75);
+	}
+
+	#header h1 strong {
+		color: #ffffff;
+		font-size: 1.25em;
+	}
+
+	.lang-switch {
+		display: inline-flex;
+		gap: 0.25em;
+		margin-bottom: 2em;
+	}
+
+	.lang-switch button {
+		background: transparent;
+		border: solid 1px rgba(255, 255, 255, 0.35);
+		border-radius: 4px;
+		box-shadow: none;
+		color: rgba(255, 255, 255, 0.8);
+		cursor: pointer;
+		font-size: 0.75em;
+		font-weight: 600;
+		height: 2.25em;
+		letter-spacing: 0.1em;
+		line-height: 2.25em;
+		padding: 0 0.9em;
+	}
+
+	.lang-switch button[aria-pressed="true"] {
+		background: #ffffff;
+		border-color: #ffffff;
+		color: #1f1815;
+	}
+
+	.lang-switch button:focus-visible,
+	.side-nav a:focus-visible {
+		outline: solid 2px #ffffff;
+		outline-offset: 2px;
+	}
+
+	#header .image.avatar img {
+		border: solid 3px rgba(255, 255, 255, 0.85);
+		height: 7.5em;
+		object-fit: cover;
+		width: 7.5em;
+	}
+
+	.availability {
+		border-left: solid 3px var(--accent);
+		color: rgba(255, 255, 255, 0.85);
+		font-size: 0.95em;
+		margin: 1.5em 0 0 0;
+		padding-left: 1em;
+	}
+
+	.side-nav ul {
+		list-style: none;
+		margin: 2em 0 0 0;
+		padding: 0;
+	}
+
+	.side-nav li {
+		padding: 0;
+	}
+
+	.side-nav a {
+		border-bottom: none;
+		color: rgba(255, 255, 255, 0.7) !important;
+		display: inline-block;
+		font-size: 0.9em;
+		line-height: 2.1em;
+	}
+
+	.side-nav a:hover {
+		color: #ffffff !important;
+	}
+
+	/* Right-aligned sidebar on desktop, centered stacked header on smaller screens. */
+	@media screen and (min-width: 981px) {
+		#header .inner {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+		}
+	}
+
+	@media screen and (max-width: 980px) {
+		.availability {
+			border-left: none;
+			padding-left: 0;
+		}
+
+		.side-nav {
+			display: none;
+		}
+	}
+
+/* Timeline (experience, education) */
+
+	.timeline {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.timeline-item {
+		border-left: solid 2px var(--border);
+		margin: 0;
+		padding: 0 0 2em 1.75em;
+		position: relative;
+	}
+
+	.timeline-item:last-child {
+		padding-bottom: 0.5em;
+	}
+
+	.timeline-item::before {
+		background: #ffffff;
+		border: solid 3px var(--accent);
+		border-radius: 100%;
+		content: '';
+		height: 0.9em;
+		left: -0.5em;
+		position: absolute;
+		top: 0.35em;
+		width: 0.9em;
+	}
+
+	.timeline-item h3 {
+		margin-bottom: 0.25em;
+	}
+
+	.timeline-item .org {
+		color: var(--accent-strong);
+		font-weight: 400;
+	}
+
+	.timeline-item .org::before {
+		color: var(--text-muted);
+		content: '@ ';
+	}
+
+	.timeline-item .meta {
+		color: var(--text-muted);
+		font-size: 0.9em;
+		margin-bottom: 0.75em;
+	}
+
+	.timeline-item ul:not(.tags) {
+		margin-bottom: 1em;
+	}
+
+/* Tags */
+
+	ul.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		list-style: none;
+		margin: 0 0 1em 0;
+		padding: 0;
+	}
+
+	ul.tags li {
+		background: var(--surface);
+		border: solid 1px var(--border);
+		border-radius: 999px;
+		color: var(--text-bold);
+		font-size: 0.8em;
+		line-height: 1.5em;
+		padding: 0.2em 0.85em;
+	}
+
+/* Project cards */
+
+	/* Each project modifier only sets --project-color; banner and results share the layout. */
+	.project--teal   { --project-color: #2f9e7e; }
+	.project--blue   { --project-color: #3a6fb0; }
+	.project--violet { --project-color: #6a5acd; }
+	.project--amber  { --project-color: #c0842b; }
+	.project--rose   { --project-color: #b8506a; }
+
+	.project-banner {
+		align-items: flex-start;
+		aspect-ratio: 16 / 7;
+		background: linear-gradient(135deg, var(--project-color) 0%, #1f1f24 110%);
+		border-radius: 6px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		margin: 0 0 1.25em 0;
+		max-width: 100%;
+		padding: 1.25em 1.5em;
+	}
+
+	.project-banner-kicker {
+		color: rgba(255, 255, 255, 0.8);
+		font-size: 0.7em;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+	}
+
+	.project-banner-title {
+		color: #ffffff;
+		font-size: 1.5em;
+		font-weight: 700;
+		letter-spacing: 0.01em;
+	}
+
+	.project-results {
+		display: grid;
+		gap: 0.6em;
+		grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+		list-style: none;
+		margin: 0 0 1em 0;
+		padding: 0;
+	}
+
+	.project-results li {
+		background: var(--surface);
+		border-left: solid 3px var(--project-color, var(--accent));
+		border-radius: 4px;
+		color: var(--text-muted);
+		font-size: 0.85em;
+		line-height: 1.45em;
+		padding: 0.6em 0.9em;
+	}
+
+	.project-results strong {
+		display: block;
+		font-size: 1.1em;
+		margin-bottom: 0.15em;
+	}
+
+	.work-item p {
+		margin-bottom: 1em;
+	}
+
+	.work-item p strong {
+		/* Darkened so small labels keep WCAG AA contrast on white. */
+		color: color-mix(in srgb, var(--project-color, var(--text-bold)) 70%, #000000);
+	}
+
+	.work-item .project-context {
+		border-bottom: dashed 1px var(--border);
+		padding-bottom: 1em;
+	}
+
+	.timeline-item .meta {
+		margin-top: 0.35em;
+	}
+
+	.work-item .project-note {
+		color: var(--text-muted);
+		font-size: 0.85em;
+		font-style: italic;
+	}
+
+/* Skills */
+
+	.skills-grid h4 {
+		margin-bottom: 0.75em;
+	}
+
+	.interests {
+		color: var(--text-muted);
+		font-size: 0.9em;
+	}
