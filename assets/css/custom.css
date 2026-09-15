@@ -188,9 +188,22 @@
 		font-weight: 400;
 	}
 
+	a.org {
+		border-bottom: none;
+	}
+
+	/* Organizations without a LinkedIn page stay plain text, not link-colored. */
+	span.org {
+		color: var(--text-bold);
+	}
+
+	a.org:hover {
+		text-decoration: underline;
+	}
+
 	.timeline-item .org::before {
 		color: var(--text-muted);
-		content: '@ ';
+		content: '@';
 	}
 
 	.timeline-item .meta {
