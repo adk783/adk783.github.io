@@ -324,13 +324,11 @@
 
 /* Profile */
 
-	.section-kicker {
-		color: var(--text-muted);
-		font-size: 0.75em;
-		font-weight: 600;
-		letter-spacing: 0.15em;
-		margin: 0 0 0.5em 0;
-		text-transform: uppercase;
+	.profile-headline {
+		color: var(--text-bold);
+		font-size: 1.1em;
+		line-height: 1.6em;
+		margin-bottom: 1em;
 	}
 
 	.cv-note {
